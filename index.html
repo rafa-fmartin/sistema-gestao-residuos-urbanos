@@ -1,35 +1,48 @@
-<!doctype html>
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engenharia Unificada II</title>
+  <link rel="stylesheet" href="/style.css">
 
-    <script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
 
-    var socket = io();
-
-    socket.on('data', function(data) {
-        console.log(data);
-        document.getElementById('sample').style.opacity = data+"%";
+    socket.on('stateArduino', (stateArduino) => {
+      console.log(stateArduino);
     });
+  </script>
+</head>
 
-    </script>
+<body>
+    <header class="cabecalho">
+        <section>
+            <img class="banner__imagem" src="/icons/ufabc.png" alt="logo ufabc">
+            <h1 class="banner__titulo">Sistema inteligente de gestão de resíduos urbanos</h1>
+        </section>
+    </header>
+    <div class="pagina-inicial">
+        <main>
+            <section class="conteudo">
+                <section>
+                    <!--<h1 class="map">Teste</h1>-->
+                    <object id="mapa" class="map" data="/mapa.svg"> </object>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer class="rodape">
+        <div class="rodape__icones">
+            <a href="https://github.com/rafa-fmartin/sistema-gestao-residuos-urbanos" target=”_blank” >
+                <img src="/icons/git.png" widht="50" height="50" alt="ícone github">
+            </a>
+        </div>
+        <p class="rodape__texto">Desenvolvido por EE6</p>
+    </footer>
+</body>
 
-    <style>
-
-      #sample {
-        background-color: red;
-        width: 300px;
-        height: 300px;
-      }
-
-    </style>
-
-  </head>
-  <body>
-
-    <h1>Communicating from an Arduino to Node.js</h1>
-    <div id="sample"></div>
-
-  </body>
 </html>

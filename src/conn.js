@@ -1,7 +1,7 @@
 //const { SerialPort } = require('serialport');
 import { SerialPort } from "serialport";
 
-const port = "COM5";
+const port = "COM3";
 const baudRate = 9600;
 const conn = new SerialPort({
     path: port,
