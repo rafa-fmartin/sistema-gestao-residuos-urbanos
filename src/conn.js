@@ -1,4 +1,3 @@
-//const { SerialPort } = require('serialport');
 import { SerialPort } from "serialport";
 
 const port = "COM3";
