@@ -1,6 +1,6 @@
 import app from "./src/app.js";
 import conn from "./src/conn.js";
-import fs from "fs";
+//import fs from "fs";
 import { Server } from "http";
 import { Server as SocketIOServer } from "socket.io";
 import { ReadlineParser } from '@serialport/parser-readline';
@@ -17,8 +17,7 @@ conn.on('open', () => {
         io.emit('data', data);
 
         const stateArduino = data.trim();
-        //io.emit('stateArduino', stateArduino);
-        io.emit('stateArduino', 'full');
+        io.emit('state', stateArduino);
 
         // fs.readFile('./static/assets/images/mapa-cheio.svg', 'utf-8', (err, newSVG) => {
         //   if (err) {

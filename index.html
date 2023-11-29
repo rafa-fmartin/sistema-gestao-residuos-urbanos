@@ -12,18 +12,42 @@
   <script>
     const socket = io();
 
-    socket.on('stateArduino', (stateArduino) => {
+    socket.on('state', (stateArduino) => {
       //console.log(stateArduino);
+      // let state;
+      // if (13 - stateArduino > 8) {
+      //   state = "Full";
+      // } else {
+      //   state = "Empty";
+      // }
+
+      let state;
+      let percent = ((12-stateArduino)*100)/12;
+      if (percent < 0) {
+        percent = 0;
+        state = "Empty";
+      } else if (percent > 100) {
+        percent = 100;
+        state = "Full";
+      } else if (percent > 80) {
+        state = "Full";
+      } else {
+        state = "Empty";
+      }
+
+      const colorElement = state === 'Full' ? 'red' : 'green';
+
       const h1Element = document.getElementById("conteudo");
-      const colorElement = stateArduino === 'full' ? 'red' : 'green';
-      h1Element.textContent = stateArduino;
+      h1Element.textContent = state;
+      h1Element.classList.add('label-cacamba');
+      h1Element.style.color = colorElement;
 
-      const colorBox = document.createElement('div');
-      colorBox.classList.add('cacamba');
-      colorBox.style.backgroundColor = colorElement;
-      colorBox.textContent = stateArduino;
-
-      document.body.appendChild(colorBox);
+      const colorboxElement = document.getElementById("color-box")
+      console.log(colorElement);
+      colorboxElement.classList.add('cacamba');
+      //colorboxElement.textContent = stateArduino + 'cm';
+      colorboxElement.textContent = percent.toFixed(2) + '%';
+      colorboxElement.style.backgroundColor = colorElement;
     });
 
   </script>
@@ -43,6 +67,7 @@
           <!--<h1 class="map">Teste</h1>-->
           <!--<object id="mapa" class="map" data="/mapa.svg"> </object>-->
           <h1 id="conteudo"></h1>
+          <div id="color-box"></div>
         </section>
       </section>
     </main>

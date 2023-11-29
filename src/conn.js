@@ -1,6 +1,6 @@
 import { SerialPort } from "serialport";
 
-const port = "COM3";
+const port = "COM6";
 const baudRate = 9600;
 const conn = new SerialPort({
     path: port,
